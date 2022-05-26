@@ -23,6 +23,7 @@ import { txBalances_transfer, txStaking_nominate, txSession_setKeys } from './ze
 import ed25519 from 'ed25519-supercop'
 // @ts-ignore
 import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
+import Transport from '@ledgerhq/hw-transport'
 
 const defaultOptions = {
   ...DEFAULT_START_OPTIONS,
@@ -36,6 +37,13 @@ jest.setTimeout(180000)
 beforeAll(async () => {
   await Zemu.checkAndPullImage()
 })
+
+const newVerticalApp = (transport: Transport) => {
+  const app = newPolkadotApp(transport);
+  (<any>app).slip0044 = 0x8000030e;
+  (<any>app).cla = 0xa7;
+  return app;
+}
 
 describe('Standard', function () {
   test.each(models)('can start and stop container', async function (m) {
@@ -61,7 +69,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const resp = await app.getVersion()
 
       console.log(resp)
@@ -81,7 +89,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000)
 
@@ -90,8 +98,8 @@ describe('Standard', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = '166wVhuQsKFeb7bd1faydHgVvX1bZU2rUuY7FJmWApNz2fQY'
-      const expected_pk = 'e1b4d72d27b3e91b9b6116555b4ea17138ddc12ca7cdbab30e2e0509bd848419'
+      const expected_address = 'nm4zTXyqGU9PKUJYRd7xm3ai32kZRqgE6Xa9WK2bs9LwiLmB6'
+      const expected_pk = '3ab6e4f1951f71bb333df857248a9b774ad63dd2539922691c96a64f6986b044'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -104,7 +112,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -119,8 +127,8 @@ describe('Standard', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = '166wVhuQsKFeb7bd1faydHgVvX1bZU2rUuY7FJmWApNz2fQY'
-      const expected_pk = 'e1b4d72d27b3e91b9b6116555b4ea17138ddc12ca7cdbab30e2e0509bd848419'
+      const expected_address = 'nm4zTXyqGU9PKUJYRd7xm3ai32kZRqgE6Xa9WK2bs9LwiLmB6'
+      const expected_pk = '3ab6e4f1951f71bb333df857248a9b774ad63dd2539922691c96a64f6986b044'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -133,7 +141,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -155,7 +163,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -196,7 +204,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -243,7 +251,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -284,7 +292,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
