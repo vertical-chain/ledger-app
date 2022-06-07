@@ -6,7 +6,7 @@ Forked from [ledger-polkadot](https://github.com/Zondax/ledger-polkadot)
 
 -------------------
 
-This project contains the Vertical app (https://niftymarket.com) for Ledger Nano S and X.
+This project contains the Vertical app (https://vertical.ws) for Ledger Nano S and X.
 
 - Ledger Nano S/X BOLOS app
 - Specs / Documentation
