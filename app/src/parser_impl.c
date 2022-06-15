@@ -370,7 +370,7 @@ uint16_t _detectAddressType(const parser_context_t *c) {
         _toStringHash(&c->tx_obj->genesisHash, hashstr, 65, 0, &pc);
 
         // Compare with known genesis hashes
-        if (strcmp(hashstr, COIN_GENESIS_HASH) == 0) {
+        if (strcmp(hashstr, COIN_GENESIS_HASH) == 0 || strcmp(hashstr, COIN_TESTNET_GENESIS_HASH) == 0) {
             return PK_ADDRESS_TYPE;
         }
     }
