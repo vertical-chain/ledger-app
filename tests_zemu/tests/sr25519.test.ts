@@ -44,7 +44,7 @@ beforeAll(async () => {
 const newVerticalApp = (transport: Transport) => {
   const app = newPolkadotApp(transport);
   (<any>app).slip0044 = 0x8000030e;
-  (<any>app).cla = 0xa7;
+  (<any>app).cla = 0x90;
   return app;
 }
 
