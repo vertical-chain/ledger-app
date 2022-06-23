@@ -1,4 +1,4 @@
-# Polkadot App
+# Vertical App
 
 ## General structure
 
@@ -97,7 +97,7 @@ The general structure of commands and responses is as follows:
 
 | Field   | Type     | Content                   | Expected   |
 | ------- | -------- | ------------------------- | ---------- |
-| CLA     | byte (1) | Application Identifier    | 0x99       |
+| CLA     | byte (1) | Application Identifier    | 0x90       |
 | INS     | byte (1) | Instruction ID            | 0x11       |
 | P1      | byte (1) | Request User confirmation | No = 0     |
 | P2      | byte (1) | Parameter 2               | ignored    |
@@ -113,7 +113,7 @@ The general structure of commands and responses is as follows:
 | Field   | Type      | Content     | Note                     |
 | ------- | --------- | ----------- | ------------------------ |
 | PK      | byte (32) | Public Key  |                          |
-| ADDR    | byte (??) | DOT address |                          |
+| ADDR    | byte (??) | NIMA address|                          |
 | SW1-SW2 | byte (2)  | Return code | see list of return codes |
 
 ---
@@ -167,7 +167,7 @@ All other packets/chunks contain data chunks that are described below
 
 | Field | Type     | Content                | Expected  |
 | ----- | -------- | ---------------------- | --------- |
-| CLA   | byte (1) | Application Identifier | 0x99      |
+| CLA   | byte (1) | Application Identifier | 0x90      |
 | INS   | byte (1) | Instruction ID         | 0x12      |
 | P1    | byte (1) | Payload desc           | 0 = init  |
 |       |          |                        | 1 = add   |
