@@ -21,6 +21,7 @@ import { txBalances_transfer } from './zemu_blobs'
 
 // @ts-ignore
 import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
+import Transport from '@ledgerhq/hw-transport'
 
 const addon = require('../../tests_tools/neon/native')
 
@@ -40,12 +41,19 @@ beforeAll(async () => {
   await Zemu.checkAndPullImage()
 })
 
+const newVerticalApp = (transport: Transport) => {
+  const app = newPolkadotApp(transport);
+  (<any>app).slip0044 = 0x8000030e;
+  (<any>app).cla = 0x90;
+  return app;
+}
+
 describe('SR25519', function () {
   test('get address sr25519', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000, false, 1)
 
@@ -68,7 +76,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions, model: 'nanos' })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
@@ -82,8 +90,8 @@ describe('SR25519', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = '1b8tiTYdzk8hZ6W65ppiGPA5TnYBAnoRDSoyxyVbj1DZENm'
-      const expected_pk = '1a08e8cba45e59c761ebe72133da0b7f4de8ce6a263690b07e3bd56dcc8d2226'
+      const expected_address = 'nm4zTXyqGU9PKUJYRd7xm3ai32kZRqgE6Xa9WK2bs9LwiLmB6'
+      const expected_pk = '3ab6e4f1951f71bb333df857248a9b774ad63dd2539922691c96a64f6986b044'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -96,7 +104,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
@@ -117,7 +125,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -159,7 +167,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -206,7 +214,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newVerticalApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000

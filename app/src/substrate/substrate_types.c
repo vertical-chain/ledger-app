@@ -112,6 +112,18 @@ parser_error_t _readCompactu128(parser_context_t* c, pd_Compactu128_t* v)
     return _readCompactInt(c, v);
 }
 
+parser_error_t _readu128(parser_context_t* c, pd_Bytes_t* v)
+{
+    CHECK_INPUT()
+
+    v->_len = 16;
+    v->_ptr = c->buffer + c->offset;
+
+    CTX_CHECK_AND_ADVANCE(c, v->_len);
+
+    return parser_ok;
+}
+
 parser_error_t _readBalance(parser_context_t* c, pd_Balance_t* v) {
     GEN_DEF_READARRAY(16)
 }
@@ -235,6 +247,10 @@ parser_error_t _readHash(parser_context_t* c, pd_Hash_t* v) {
 
 parser_error_t _readVecHeader(parser_context_t* c, pd_VecHeader_t* v) {
     GEN_DEF_READVECTOR(Header)
+}
+
+parser_error_t _readVecu32(parser_context_t* c, pd_Vecu32_t* v) {
+    GEN_DEF_READVECTOR(u32)
 }
 
 parser_error_t _readVecu8(parser_context_t* c, pd_Vecu8_t* v) {
@@ -661,6 +677,16 @@ parser_error_t _toStringVecHeader(
     uint8_t pageIdx,
     uint8_t* pageCount) {
     GEN_DEF_TOSTRING_VECTOR(Header)
+}
+
+parser_error_t _toStringVecu32(
+    const pd_Vecu32_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    GEN_DEF_TOSTRING_VECTOR(u32);
 }
 
 parser_error_t _toStringVecu8(

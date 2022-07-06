@@ -356,13 +356,13 @@ parser_error_t _checkVersions(parser_context_t *c) {
     return parser_ok;
 }
 
-uint8_t __address_type;
+uint16_t __address_type;
 
-uint8_t _getAddressType() {
+uint16_t _getAddressType() {
     return __address_type;
 }
 
-uint8_t _detectAddressType(const parser_context_t *c) {
+uint16_t _detectAddressType(const parser_context_t *c) {
     char hashstr[65];
     uint8_t pc;
 
@@ -370,7 +370,7 @@ uint8_t _detectAddressType(const parser_context_t *c) {
         _toStringHash(&c->tx_obj->genesisHash, hashstr, 65, 0, &pc);
 
         // Compare with known genesis hashes
-        if (strcmp(hashstr, COIN_GENESIS_HASH) == 0) {
+        if (strcmp(hashstr, COIN_GENESIS_HASH) == 0 || strcmp(hashstr, COIN_TESTNET_GENESIS_HASH) == 0) {
             return PK_ADDRESS_TYPE;
         }
     }
