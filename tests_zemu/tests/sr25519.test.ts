@@ -62,8 +62,8 @@ describe('SR25519', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = '1b8tiTYdzk8hZ6W65ppiGPA5TnYBAnoRDSoyxyVbj1DZENm'
-      const expected_pk = '1a08e8cba45e59c761ebe72133da0b7f4de8ce6a263690b07e3bd56dcc8d2226'
+      const expected_address = 'nm3rTS3RYQPyALJqV9LBKYUiwN84eNFD3pBeZ1CbAVZXEHk8b'
+      const expected_pk = '08605a5cd24de51c1539dbbf0497fca958e2fbe49d0951373c6940eb4bd24866'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -90,8 +90,8 @@ describe('SR25519', function () {
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
 
-      const expected_address = 'nm4zTXyqGU9PKUJYRd7xm3ai32kZRqgE6Xa9WK2bs9LwiLmB6'
-      const expected_pk = '3ab6e4f1951f71bb333df857248a9b774ad63dd2539922691c96a64f6986b044'
+      const expected_address = 'nm3rTS3RYQPyALJqV9LBKYUiwN84eNFD3pBeZ1CbAVZXEHk8b'
+      const expected_pk = '08605a5cd24de51c1539dbbf0497fca958e2fbe49d0951373c6940eb4bd24866'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
